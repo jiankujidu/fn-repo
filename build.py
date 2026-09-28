@@ -83,14 +83,20 @@ def run_fnpack(fnpack_bin: str, app_dir: Path) -> Path:
         cwd=str(app_dir),
         capture_output=True, text=True,
     )
+    # 打印 fnpack 输出便于调试
+    if r.stdout.strip():
+        print("  [fnpack]", r.stdout.strip()[:500])
+    if r.stderr.strip():
+        print("  [fnpack stderr]", r.stderr.strip()[:500])
     if r.returncode != 0:
-        print(f"  [fnpack stdout] {r.stdout}")
-        print(f"  [fnpack stderr] {r.stderr}")
         sys.exit(f"[ERROR] fnpack build 失败: {app_dir.name}")
 
     fpk_files = list(app_dir.glob("*.fpk"))
     if not fpk_files:
-        sys.exit(f"[ERROR] 未生成 FPK: {app_dir.name}")
+        # 兜底：递归搜索
+        fpk_files = list(app_dir.rglob("*.fpk"))
+    if not fpk_files:
+        sys.exit(f"[ERROR] 未生成 FPK: {app_dir.name}（目录内容: {[p.name for p in app_dir.iterdir()]}）")
     return fpk_files[0]
 
 

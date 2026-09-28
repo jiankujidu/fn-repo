@@ -27,6 +27,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Fix script permissions (exec bit lost on Windows commit)
+        run: |
+          find apps -type f \( -name "*.cgi" -path "*/ui/*" -o -path "*/cmd/*" \) -exec chmod +x {} \;
+          find apps -type f -path "*/cmd/*" -exec chmod +x {} \;
+
       - name: Download fnpack (Linux)
         run: |
           curl -L -o /usr/local/bin/fnpack \
