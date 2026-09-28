@@ -1,8 +1,9 @@
 {
   "schema_version": "2",
   "source_info": {
-    "name": "测试仓库",
-    "author": "test"
+    "name": "jiankujidu 飞牛应用仓库",
+    "author": "jiankujidu",
+    "homepage": "https://github.com/jiankujidu/fn-repo"
   },
   "apps": {
     "hello-fn": {
@@ -22,13 +23,13 @@
       "maintainer": "fn-store",
       "releases": {
         "1.0.0": {
-          "updated_at": "2026-09-28T14:11:05+08:00",
+          "updated_at": "2026-09-28T14:13:23+08:00",
           "changelog": "首次发布",
           "packages": {
             "all": {
-              "download_url": "https://yourname.github.io/fn-repo/fpk/hello-fn-1.0.0.fpk",
-              "sha256": "5b54a20f4a4c54abeea9d89204503977bb4fde6d48f5cd20b3d07bb5abf64929",
-              "size": 14711
+              "download_url": "https://jiankujidu.github.io/fn-repo/fpk/hello-fn-1.0.0.fpk",
+              "sha256": "fe20d4c3b440ce66c16b390fa91da9b6e1b63f14f2a21a723f3f5162edd50a07",
+              "size": 14698
             }
           }
         }
