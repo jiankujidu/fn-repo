@@ -1,5 +1,5 @@
 appname               = hello-fn
-version               = 1.0.0
+version               = 1.0.1
 display_name          = Hello飞牛
 desc                  = 飞牛NAS示例静态应用，展示最小可运行 FPK 包结构
 platform              = all
