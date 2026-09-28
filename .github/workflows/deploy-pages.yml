@@ -27,15 +27,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download fnpack
+      - name: Download fnpack (Linux)
         run: |
-          curl -L -o fnpack https://static2.fnnas.com/fnpack/fnpack-1.2.3-linux-amd64
-          chmod +x fnpack
+          curl -L -o /usr/local/bin/fnpack \
+            "https://static2.fnnas.com/fnpack/fnpack-1.2.3-linux-amd64"
+          chmod +x /usr/local/bin/fnpack
+          fnpack --help | head -5
 
       - name: Build FPK + fnpack.json
         run: |
           python3 build.py \
-            --fnpack ./fnpack \
+            --fnpack /usr/local/bin/fnpack \
             --source-name "jiankujidu 飞牛应用仓库" \
             --source-author "jiankujidu" \
             --homepage "https://github.com/jiankujidu/fn-repo" \
