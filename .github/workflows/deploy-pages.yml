@@ -1,0 +1,56 @@
+name: Deploy to GitHub Pages
+
+on:
+  # 每次推送到 main 自动触发
+  push:
+    branches: [main]
+  # 允许手动触发
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同时只允许一个部署并发
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download fnpack
+        run: |
+          curl -L -o fnpack https://static2.fnnas.com/fnpack/fnpack-1.2.3-linux-amd64
+          chmod +x fnpack
+
+      - name: Build FPK + fnpack.json
+        run: |
+          python3 build.py \
+            --fnpack ./fnpack \
+            --source-name "jiankujidu 飞牛应用仓库" \
+            --source-author "jiankujidu" \
+            --homepage "https://github.com/jiankujidu/fn-repo" \
+            --base-url "https://jiankujidu.github.io/fn-repo"
+
+      - name: Sync dist → root (Pages serves root)
+        run: |
+          cp -r dist/fnpack.json dist/fpk/ dist/icons/ . 2>/dev/null || true
+          mkdir -p previews && cp -r dist/previews/* previews/ 2>/dev/null || true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
