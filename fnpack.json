@@ -1,0 +1,38 @@
+{
+  "schema_version": "2",
+  "source_info": {
+    "name": "测试仓库",
+    "author": "test"
+  },
+  "apps": {
+    "hello-fn": {
+      "display_name": "Hello飞牛",
+      "desc": "飞牛NAS示例静态应用，展示最小可运行 FPK 包结构",
+      "platform": [
+        "all"
+      ],
+      "categories": [
+        "系统工具"
+      ],
+      "icon_url": "icons/hello-fn/icon.png",
+      "preview_urls": [],
+      "run_as": "package",
+      "install_type": "",
+      "is_docker": false,
+      "maintainer": "fn-store",
+      "releases": {
+        "1.0.0": {
+          "updated_at": "2026-09-28T14:11:05+08:00",
+          "changelog": "首次发布",
+          "packages": {
+            "all": {
+              "download_url": "https://yourname.github.io/fn-repo/fpk/hello-fn-1.0.0.fpk",
+              "sha256": "5b54a20f4a4c54abeea9d89204503977bb4fde6d48f5cd20b3d07bb5abf64929",
+              "size": 14711
+            }
+          }
+        }
+      }
+    }
+  }
+}
